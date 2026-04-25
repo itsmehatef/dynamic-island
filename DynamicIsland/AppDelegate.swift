@@ -30,7 +30,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         NSApp.terminate(nil)
     }
 
-    private func refresh() {
+    func refresh() {
         blocker.refresh()
         isActive = blocker.isActive
     }

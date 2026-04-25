@@ -11,13 +11,16 @@ final class NotchBlocker {
             return
         }
 
-        guard ScreenGeometry.hasNotch(screen) else {
+        guard ScreenGeometry.shouldReserveSpace(for: screen) else {
             teardown()
             return
         }
 
         let width = ScreenGeometry.notchWidth(for: screen) + 8
-        install(width: width)
+        install(
+            width: width,
+            showsDebugColor: UserDefaults.standard.bool(forKey: ScreenGeometry.forceSpacerDefaultsKey)
+        )
     }
 
     func teardown() {
@@ -27,12 +30,20 @@ final class NotchBlocker {
         spacer = nil
     }
 
-    private func install(width: CGFloat) {
+    private func install(width: CGFloat, showsDebugColor: Bool) {
         teardown()
 
         let item = NSStatusBar.system.statusItem(withLength: width)
         if let button = item.button {
-            button.image = Self.transparentImage
+            if showsDebugColor {
+                button.wantsLayer = true
+                button.layer?.backgroundColor = NSColor.systemPink.withAlphaComponent(0.75).cgColor
+                button.layer?.cornerRadius = 4
+                button.layer?.masksToBounds = true
+                button.image = nil
+            } else {
+                button.image = Self.transparentImage
+            }
             button.imagePosition = .imageOnly
             button.isEnabled = false
         }
