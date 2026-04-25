@@ -35,17 +35,23 @@ final class NotchBlocker {
 
         let item = NSStatusBar.system.statusItem(withLength: width)
         if let button = item.button {
-            if showsDebugColor {
-                button.wantsLayer = true
-                button.layer?.backgroundColor = NSColor.systemPink.withAlphaComponent(0.75).cgColor
-                button.layer?.cornerRadius = 4
-                button.layer?.masksToBounds = true
-                button.image = nil
-            } else {
-                button.image = Self.transparentImage
-            }
+            button.image = showsDebugColor ? nil : Self.transparentImage
             button.imagePosition = .imageOnly
             button.isEnabled = false
+
+            if showsDebugColor {
+                // Add overlay into the status item window's contentView so the colored
+                // area fills the full menu bar height. The button's own frame is
+                // inset, so coloring its layer leaves visible top/bottom gaps.
+                DispatchQueue.main.async { [weak button] in
+                    guard let contentView = button?.window?.contentView else { return }
+                    let overlay = NSView(frame: contentView.bounds)
+                    overlay.autoresizingMask = [.width, .height]
+                    overlay.wantsLayer = true
+                    overlay.layer?.backgroundColor = NSColor.systemPink.withAlphaComponent(0.75).cgColor
+                    contentView.addSubview(overlay, positioned: .below, relativeTo: button)
+                }
+            }
         }
         spacer = item
     }
