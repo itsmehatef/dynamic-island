@@ -38,29 +38,38 @@ final class NotchOverlay {
                 forName: NSWorkspace.activeSpaceDidChangeNotification,
                 object: nil,
                 queue: .main
-            ) { [weak self] _ in self?.evaluate() }
+            ) { [weak self] _ in
+                NSLog("[DynamicIsland] activeSpaceDidChange")
+                self?.evaluate(reason: "spaceChange")
+            }
         }
         if screenObserver == nil {
             screenObserver = NotificationCenter.default.addObserver(
                 forName: NSApplication.didChangeScreenParametersNotification,
                 object: nil,
                 queue: .main
-            ) { [weak self] _ in self?.evaluate() }
+            ) { [weak self] _ in
+                NSLog("[DynamicIsland] didChangeScreenParameters")
+                self?.evaluate(reason: "screenParams")
+            }
         }
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
-                self?.evaluate()
+                self?.evaluate(reason: "timer")
             }
         }
     }
 
-    private func evaluate() {
+    private func evaluate(reason: String = "manual") {
         guard let screen = NSScreen.main,
               ScreenGeometry.shouldReserveSpace(for: screen) else {
+            NSLog("[DynamicIsland] evaluate(\(reason)): no eligible screen, orderOut")
             window?.orderOut(nil)
             return
         }
-        let menuBarVisible = (screen.frame.maxY - screen.visibleFrame.maxY) > 0.5
+        let inset = screen.frame.maxY - screen.visibleFrame.maxY
+        let menuBarVisible = inset > 0.5
+        NSLog("[DynamicIsland] evaluate(\(reason)): frame=\(screen.frame) visibleFrame=\(screen.visibleFrame) inset=\(inset) menuBarVisible=\(menuBarVisible)")
         guard menuBarVisible else {
             window?.orderOut(nil)
             return
