@@ -1,4 +1,13 @@
 import AppKit
+import Darwin
+
+private func diLog(_ message: String) {
+    let timestamp = ISO8601DateFormatter().string(from: Date())
+    let line = "\(timestamp) \(message)\n"
+    guard let fp = fopen("/tmp/dynamic-island.log", "a") else { return }
+    fputs(line, fp)
+    fclose(fp)
+}
 
 final class NotchOverlay {
     private var window: NSWindow?
@@ -39,7 +48,7 @@ final class NotchOverlay {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                NSLog("%{public}@", "[DynamicIsland] activeSpaceDidChange")
+                diLog("[DynamicIsland] activeSpaceDidChange")
                 self?.evaluate(reason: "spaceChange")
             }
         }
@@ -49,7 +58,7 @@ final class NotchOverlay {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                NSLog("%{public}@", "[DynamicIsland] didChangeScreenParameters")
+                diLog("[DynamicIsland] didChangeScreenParameters")
                 self?.evaluate(reason: "screenParams")
             }
         }
@@ -63,13 +72,13 @@ final class NotchOverlay {
     private func evaluate(reason: String = "manual") {
         guard let screen = NSScreen.main,
               ScreenGeometry.shouldReserveSpace(for: screen) else {
-            NSLog("%{public}@", "[DynamicIsland] evaluate(\(reason)): no eligible screen, orderOut")
+            diLog("[DynamicIsland] evaluate(\(reason)): no eligible screen, orderOut")
             window?.orderOut(nil)
             return
         }
         let inset = screen.frame.maxY - screen.visibleFrame.maxY
         let menuBarVisible = inset > 0.5
-        NSLog("%{public}@", "[DynamicIsland] evaluate(\(reason)): frame=\(screen.frame) visibleFrame=\(screen.visibleFrame) inset=\(inset) menuBarVisible=\(menuBarVisible)")
+        diLog("[DynamicIsland] evaluate(\(reason)): frame=\(screen.frame) visibleFrame=\(screen.visibleFrame) inset=\(inset) menuBarVisible=\(menuBarVisible)")
         guard menuBarVisible else {
             window?.orderOut(nil)
             return
