@@ -24,7 +24,7 @@ enum ScreenGeometry {
     }
 
     static func notchFrame(on screen: NSScreen) -> NSRect {
-        let height = NSStatusBar.system.thickness
+        let height = menuBarHeight(of: screen)
         let width = notchWidth(for: screen)
         let x: CGFloat
         if hasNotch(screen), let leftArea = screen.auxiliaryTopLeftArea {
@@ -34,5 +34,10 @@ enum ScreenGeometry {
         }
         let y = screen.frame.maxY - height
         return NSRect(x: x, y: y, width: width, height: height)
+    }
+
+    static func menuBarHeight(of screen: NSScreen) -> CGFloat {
+        let derived = screen.frame.maxY - screen.visibleFrame.maxY
+        return derived > 0 ? derived : NSStatusBar.system.thickness
     }
 }
