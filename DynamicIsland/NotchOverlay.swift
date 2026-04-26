@@ -2,7 +2,7 @@ import AppKit
 
 final class NotchOverlay {
     private var window: NSWindow?
-    private var tracker: MenuBarAnimationTracker?
+    private var tracker: MenuBarTracker?
     private var trackerDisplayID: CGDirectDisplayID?
 
     func refresh(showsDebugColor: Bool) {
@@ -19,7 +19,7 @@ final class NotchOverlay {
         if id != trackerDisplayID {
             tracker?.stop()
             trackerDisplayID = id
-            tracker = MenuBarAnimationTracker(screen: screen) { [weak self] menuBarFrame in
+            tracker = MenuBarTracker(screen: screen) { [weak self] menuBarFrame in
                 self?.handleMenuBarUpdate(menuBarFrame)
             }
             tracker?.start()
