@@ -76,14 +76,39 @@ final class NotchOverlay {
             window?.orderOut(nil)
             return
         }
-        let inset = screen.frame.maxY - screen.visibleFrame.maxY
-        let menuBarVisible = inset > 0.5
-        diLog("[DynamicIsland] evaluate(\(reason)): frame=\(screen.frame) visibleFrame=\(screen.visibleFrame) inset=\(inset) menuBarVisible=\(menuBarVisible)")
-        guard menuBarVisible else {
+        let fullscreen = isAnyAppFullscreen(on: screen)
+        diLog("[DynamicIsland] evaluate(\(reason)): fullscreen=\(fullscreen)")
+        guard !fullscreen else {
             window?.orderOut(nil)
             return
         }
         present(frame: ScreenGeometry.notchFrame(on: screen))
+    }
+
+    private func isAnyAppFullscreen(on screen: NSScreen) -> Bool {
+        let myPid = ProcessInfo.processInfo.processIdentifier
+        guard let infoList = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] else {
+            return false
+        }
+        let screenWidth = screen.frame.width
+        let screenHeight = screen.frame.height
+        for info in infoList {
+            guard let bounds = info[kCGWindowBounds as String] as? [String: CGFloat],
+                  let pid = info[kCGWindowOwnerPID as String] as? Int32,
+                  let layer = info[kCGWindowLayer as String] as? Int else {
+                continue
+            }
+            if pid == myPid { continue }
+            if layer != 0 { continue }
+            let w = bounds["Width"] ?? 0
+            let h = bounds["Height"] ?? 0
+            if abs(w - screenWidth) < 2 && abs(h - screenHeight) < 2 {
+                let owner = info[kCGWindowOwnerName as String] as? String ?? "?"
+                diLog("[DynamicIsland] fullscreen window from owner=\(owner) bounds=\(bounds)")
+                return true
+            }
+        }
+        return false
     }
 
     private func present(frame: NSRect) {
