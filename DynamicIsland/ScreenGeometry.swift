@@ -22,4 +22,17 @@ enum ScreenGeometry {
 
         return computed > 0 ? computed : fallbackNotchWidth
     }
+
+    static func notchFrame(on screen: NSScreen) -> NSRect {
+        let height = NSStatusBar.system.thickness
+        let width = notchWidth(for: screen)
+        let x: CGFloat
+        if hasNotch(screen), let leftArea = screen.auxiliaryTopLeftArea {
+            x = leftArea.maxX
+        } else {
+            x = screen.frame.minX + (screen.frame.width - width) / 2
+        }
+        let y = screen.frame.maxY - height
+        return NSRect(x: x, y: y, width: width, height: height)
+    }
 }

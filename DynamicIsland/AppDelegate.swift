@@ -5,6 +5,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     @Published private(set) var isActive = false
 
     private let blocker = NotchBlocker()
+    private let overlay = NotchOverlay()
     private var screenChangeObserver: NSObjectProtocol?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -24,6 +25,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             NotificationCenter.default.removeObserver(screenChangeObserver)
         }
         blocker.teardown()
+        overlay.teardown()
     }
 
     func quit() {
@@ -31,7 +33,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     }
 
     func refresh() {
+        let debug = UserDefaults.standard.bool(forKey: ScreenGeometry.forceSpacerDefaultsKey)
         blocker.refresh()
+        overlay.refresh(showsDebugColor: debug)
         isActive = blocker.isActive
     }
 }
