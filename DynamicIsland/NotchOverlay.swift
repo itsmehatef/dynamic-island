@@ -36,7 +36,7 @@ final class NotchOverlay {
             )
             w.isReleasedWhenClosed = false
             w.level = .statusBar
-            w.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
+            w.collectionBehavior = [.canJoinAllSpaces, .stationary]
             w.backgroundColor = .clear
             w.isOpaque = false
             w.hasShadow = false
