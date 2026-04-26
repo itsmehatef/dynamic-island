@@ -64,40 +64,41 @@ final class MenuBarTracker {
             didLogCandidates = true
         }
 
-        let primaryHeight = MenuBarTracker.primaryDisplayHeight()
-        let targetTopInCG = primaryHeight - screen.frame.maxY
-
-        var bestMatch: CGRect?
-        var bestDistance: CGFloat = .infinity
-
+        var candidates: [CGRect] = []
         for info in infoList {
             guard let owner = info[kCGWindowOwnerName as String] as? String,
-                  owner == "Window Server" || owner == "WindowServer" else {
-                continue
-            }
-            guard let layer = info[kCGWindowLayer as String] as? Int, layer == 24 else {
-                continue
-            }
+                  owner == "Window Server" || owner == "WindowServer" else { continue }
+            guard let layer = info[kCGWindowLayer as String] as? Int, layer == 24 else { continue }
             guard let boundsDict = info[kCGWindowBounds as String] as? NSDictionary,
-                  let bounds = CGRect(dictionaryRepresentation: boundsDict) else {
-                continue
-            }
-            // Align with target screen's left edge (handles multi-display layouts).
-            guard abs(bounds.origin.x - screen.frame.minX) < 4 else { continue }
-            // Span (most of) the target screen's width.
-            guard abs(bounds.width - screen.frame.width) < 4 else { continue }
+                  let bounds = CGRect(dictionaryRepresentation: boundsDict) else { continue }
             // Menu bar height range (24pt standard, ~38pt notched).
             guard bounds.height >= 20, bounds.height <= 60 else { continue }
-
-            let distance = abs(bounds.origin.y - targetTopInCG)
-            if distance < bestDistance {
-                bestDistance = distance
-                bestMatch = bounds
-            }
+            // Must overlap target screen horizontally (handles single, split-on-notched, and multi-display).
+            guard bounds.minX < screen.frame.maxX, bounds.maxX > screen.frame.minX else { continue }
+            candidates.append(bounds)
         }
 
-        guard let cgRect = bestMatch else { return nil }
-        let appKitRect = cgRectToAppKit(cgRect, primaryHeight: primaryHeight)
+        guard !candidates.isEmpty else { return nil }
+
+        // The live menu bar always sits at or above (in screen-up = larger CGWindow y... wait,
+        // CGWindow y grows downward, so "more on screen" = larger y). The parked reserve is
+        // pinned at -barHeight; the live bar's y is in [-barHeight, 0]. Picking the maximum y
+        // selects the live bar(s) and never snaps to the reserve mid-animation.
+        let maxY = candidates.map(\.origin.y).max()!
+        let live = candidates.filter { abs($0.origin.y - maxY) < 0.5 }
+
+        // Union the live candidates. On notched MacBooks the menu bar is rendered as two
+        // separate layer-24 windows (left + right of notch); their union spans the screen.
+        var union = live[0]
+        for rect in live.dropFirst() {
+            union = union.union(rect)
+        }
+
+        // Sanity: the union must align with this screen's horizontal extent.
+        guard abs(union.minX - screen.frame.minX) < 4 else { return nil }
+        guard abs(union.width - screen.frame.width) < 8 else { return nil }
+
+        let appKitRect = cgRectToAppKit(union, primaryHeight: MenuBarTracker.primaryDisplayHeight())
         return isOnScreen(appKitRect) ? appKitRect : nil
     }
 

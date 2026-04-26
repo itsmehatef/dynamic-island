@@ -3,7 +3,7 @@ import AppKit
 final class NotchOverlay {
     private var window: NSWindow?
     private var tracker: MenuBarTracker?
-    private var trackerScreen: NSScreen?
+    private var trackerDisplayID: CGDirectDisplayID?
 
     func refresh(showsDebugColor: Bool) {
         guard showsDebugColor,
@@ -13,9 +13,12 @@ final class NotchOverlay {
             return
         }
 
-        if trackerScreen !== screen {
+        // NSScreen.main returns a fresh Swift instance on every call, so an identity
+        // (===) compare always fires. Compare the underlying CGDirectDisplayID instead.
+        let id = NotchOverlay.displayID(of: screen)
+        if id != trackerDisplayID {
             tracker?.stop()
-            trackerScreen = screen
+            trackerDisplayID = id
             tracker = MenuBarTracker(screen: screen) { [weak self] menuBarFrame in
                 self?.handleMenuBarUpdate(menuBarFrame)
             }
@@ -26,9 +29,14 @@ final class NotchOverlay {
     func teardown() {
         tracker?.stop()
         tracker = nil
-        trackerScreen = nil
+        trackerDisplayID = nil
         window?.orderOut(nil)
         window = nil
+    }
+
+    private static func displayID(of screen: NSScreen) -> CGDirectDisplayID {
+        let key = NSDeviceDescriptionKey("NSScreenNumber")
+        return (screen.deviceDescription[key] as? NSNumber)?.uint32Value ?? 0
     }
 
     private func handleMenuBarUpdate(_ menuBarFrame: NSRect?) {
@@ -58,8 +66,11 @@ final class NotchOverlay {
         window = w
         w.setFrame(frame, display: true)
         w.contentView?.layer?.backgroundColor = NSColor.systemPink.withAlphaComponent(0.75).cgColor
+        // Window is at .statusBar level, so level guarantees it's above the menu bar
+        // (.mainMenu). Plain orderFront is enough; orderFrontRegardless is loud and
+        // unnecessary at this level.
         if !w.isVisible {
-            w.orderFrontRegardless()
+            w.orderFront(nil)
         }
     }
 
