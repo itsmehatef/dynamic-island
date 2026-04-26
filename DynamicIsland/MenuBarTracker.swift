@@ -55,7 +55,7 @@ final class MenuBarTracker {
     }
 
     private func findMenuBarRect() -> NSRect? {
-        guard let infoList = CGWindowListCopyWindowInfo([.optionAll], kCGNullWindowID) as? [[String: Any]] else {
+        guard let infoList = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] else {
             return nil
         }
 
@@ -69,6 +69,15 @@ final class MenuBarTracker {
             guard let owner = info[kCGWindowOwnerName as String] as? String,
                   owner == "Window Server" || owner == "WindowServer" else { continue }
             guard let layer = info[kCGWindowLayer as String] as? Int, layer == 24 else { continue }
+            if let name = info[kCGWindowName as String] as? String, name != "Menubar" { continue }
+            if let isOnscreen = info[kCGWindowIsOnscreen as String] as? NSNumber,
+               !isOnscreen.boolValue {
+                continue
+            }
+            if let alpha = info[kCGWindowAlpha as String] as? NSNumber,
+               alpha.doubleValue <= 0.01 {
+                continue
+            }
             guard let boundsDict = info[kCGWindowBounds as String] as? NSDictionary,
                   let bounds = CGRect(dictionaryRepresentation: boundsDict) else { continue }
             // Menu bar height range (24pt standard, ~38pt notched).
