@@ -39,7 +39,7 @@ final class NotchOverlay {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                NSLog("[DynamicIsland] activeSpaceDidChange")
+                NSLog("%{public}@", "[DynamicIsland] activeSpaceDidChange")
                 self?.evaluate(reason: "spaceChange")
             }
         }
@@ -49,7 +49,7 @@ final class NotchOverlay {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                NSLog("[DynamicIsland] didChangeScreenParameters")
+                NSLog("%{public}@", "[DynamicIsland] didChangeScreenParameters")
                 self?.evaluate(reason: "screenParams")
             }
         }
@@ -63,13 +63,13 @@ final class NotchOverlay {
     private func evaluate(reason: String = "manual") {
         guard let screen = NSScreen.main,
               ScreenGeometry.shouldReserveSpace(for: screen) else {
-            NSLog("[DynamicIsland] evaluate(\(reason)): no eligible screen, orderOut")
+            NSLog("%{public}@", "[DynamicIsland] evaluate(\(reason)): no eligible screen, orderOut")
             window?.orderOut(nil)
             return
         }
         let inset = screen.frame.maxY - screen.visibleFrame.maxY
         let menuBarVisible = inset > 0.5
-        NSLog("[DynamicIsland] evaluate(\(reason)): frame=\(screen.frame) visibleFrame=\(screen.visibleFrame) inset=\(inset) menuBarVisible=\(menuBarVisible)")
+        NSLog("%{public}@", "[DynamicIsland] evaluate(\(reason)): frame=\(screen.frame) visibleFrame=\(screen.visibleFrame) inset=\(inset) menuBarVisible=\(menuBarVisible)")
         guard menuBarVisible else {
             window?.orderOut(nil)
             return
