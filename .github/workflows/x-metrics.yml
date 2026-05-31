@@ -1,0 +1,45 @@
+name: Daily X Metrics
+
+# Pulls @itsmehatef engagement + follower metrics once a day and commits the
+# snapshot. This is the durable replacement for an in-session loop.
+on:
+  schedule:
+    - cron: '0 13 * * *'   # 13:00 UTC ≈ 8:00am CT — daily
+  workflow_dispatch:        # lets you run it on demand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/philosophical-startup-tweet-9Atxl
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Pull metrics + write daily report
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        run: |
+          if [ -z "$X_BEARER_TOKEN" ]; then
+            echo "::error::X_BEARER_TOKEN secret is not set. Add it under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          python3 scripts/x_metrics.py | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "No metric changes to commit."
+          else
+            git commit -m "chore: daily X metrics snapshot"
+            git push
+          fi
