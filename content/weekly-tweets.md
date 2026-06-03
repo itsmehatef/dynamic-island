@@ -1,5 +1,102 @@
 # Weekly Tweet Plan — @itsmehatef
 
+> **⚡ v2 update (Jun 3, after Sun–Tue live data).** The plan below the divider is the
+> original v1. The **revised Wed–Sat plan is at the top here** — it reflects what the
+> first 3 days of live posting actually proved. See `README.md` for the full analysis.
+>
+> **What the data changed:**
+> - **Replies drive reach, not likes.** Every post with 7+ replies broke 250+ impressions;
+>   every post with 0–1 replies died under 70. Optimize the first 5 replies.
+> - **Vulnerable reflection + an answerable question is the top format** (the "what did you
+>   cut?" post: 11 likes / 10 replies / 575 impressions). Beats the dry builder-question.
+> - **Literal product changelogs are dead** (chop "ingredient swaps" update: 17 impressions).
+>   Reframe build-in-public as a *struggle/tension* people can relate to, not a feature list.
+> - **Evenings only.** Winners landed 7pm–midnight CT. Every 3pm afternoon post flopped
+>   (52/25/22 imp). Kill the midday slot.
+>
+> **New cadence: 2 posts/day, both in the 7pm–12am CT window.**
+> - **Slot 1 (~7pm CT):** reflection + answerable question (the 575-impression mold)
+> - **Slot 2 (~10pm–12am CT):** question + options OR a relatable take (the 263/862 mold)
+
+## Revised Plan — Wednesday → Saturday (v2)
+
+### Wednesday
+**1 · ~7pm (reflection + question):**
+```
+a month in, the thing nobody warned me about building solo:
+
+you can ship every day and still feel like you're standing still.
+
+how do you tell real progress from motion?
+```
+**2 · ~11pm (options):**
+```
+building an AI agent, what's actually the hard part?
+
+> context
+> tool/integration hell
+> reliability
+> evals
+```
+
+### Thursday
+**1 · ~7pm (reflection + question):**
+```
+i deleted a feature today that took me a week to build.
+
+nobody noticed. that's the part that stings.
+
+what's something you killed that you secretly miss?
+```
+**2 · ~11pm (relatable take):**
+```
+devs, be honest:
+
+how much of your current codebase do you actually understand line by line right now?
+```
+
+### Friday
+**1 · ~7pm (reflection + question):**
+```
+the scariest part of going solo isn't the money.
+
+it's that there's no one to tell you the idea is bad before you spend 3 months on it.
+
+how do you sanity-check yourself?
+```
+**2 · ~11pm (options):**
+```
+what do you build first in a brand new app?
+
+> auth
+> the core loop
+> landing page
+> payments
+```
+
+### Saturday (weekend — lighter)
+**1 · ~6pm (reflection + question):**
+```
+every side project i abandoned died at the same spot:
+
+not the hard part. the boring stretch right after it.
+
+where do yours usually die?
+```
+**2 · ~10pm (options):**
+```
+what kills a side project first?
+
+> boredom
+> no users
+> the day job
+> the next idea
+```
+
+---
+
+# (v1 — original plan, superseded above for Wed–Sat)
+
 **Strategy:** Built entirely in your proven formats (the ones that pulled 13–30 engagement), not the philosophical genre (1–3). **3 posts/day**, rotated:
 - **A — Builder question:** opens with `builders:` / `solo devs:` + one concrete, universally-answerable question. (Your workhorse — this got you 30.)
 - **B — Question + options:** a question with 3–4 short vertical options. Pure reply fuel (got you 13).
