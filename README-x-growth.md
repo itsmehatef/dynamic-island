@@ -47,8 +47,13 @@ showed, and the scripts that automate the loop.
   banger gate; structures deliberately varied (question-first, narrative,
   options, confession) so the week doesn't read as one repeated template.
   The "hot take:" opener was cut (template tell); an "i'll actually reply"
-  line was softened (borderline engagement-bait). Final slate lives at the top
-  of `content/weekly-tweets.md`.
+  line was softened (borderline engagement-bait).
+- **No-fabrication pass (v2.1a).** Stripped every invented personal story and
+  metric the drafts had picked up ("got my first 10 users", "month two solo",
+  "shipped a feature at 2am", "built a whole onboarding flow"). Rule going
+  forward: tweets are framed as genuine questions, opinions, and relatable
+  observations — never as specific events or numbers that didn't happen. Final
+  slate lives at the top of `content/weekly-tweets.md`.
 
 ## Account snapshot
 

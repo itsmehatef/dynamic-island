@@ -22,21 +22,21 @@
 
 > **v2.1 (Jun 3):** Rewritten by the copy + banger-gate critic teams for maximum
 > **reply-itch** and high banger-classifier scores. 3 posts/day (afternoon /
-> evening / night — morning dropped, it was dead). Each day rotates 3 archetypes:
-> reflection+confession, question+options, builder-question/mild-take. Structures
-> deliberately varied (some open on the question, some run as narrative) so the
-> week doesn't read as one repeated template. Critic confidence noted per tweet.
+> evening / night — morning dropped, it was dead). Each day rotates archetypes:
+> reflection-question, question+options, builder-question/mild-take. Critic
+> confidence noted per tweet.
+>
+> **No-fabrication rule (v2.1a):** none of these invent specific personal events,
+> metrics, or backstories ("got my first 10 users", "month two", "shipped at 2am").
+> They're framed as genuine questions, opinions, and relatable observations Hatef
+> can stand behind without claiming things that didn't happen.
 
 ### Wednesday
 **1 · afternoon · builder question (conf 86%):**
 ```
-posting every commit got me 4 likes and zero users.
+the stuff that looks good on your timeline and the stuff that actually gets you users are rarely the same thing.
 
-one post that just said "i have no idea how to get users" got me 40 replies and my first 10 customers.
-
-turns out admitting you're lost beats looking like you're winning.
-
-what's the post that actually got you users?
+builders: which of your posts actually brought in users?
 ```
 **2 · evening · options (conf 88%):**
 ```
@@ -49,13 +49,9 @@ the thing that quietly eats the most of my solo-dev week:
 
 which one's silently killing your time?
 ```
-**3 · night · reflection+confession (conf 90%):**
+**3 · night · question (conf 90%):**
 ```
-shipped a feature at 2am that nobody asked for.
-
-woke up, looked at it, deleted it before coffee.
-
-felt better than launching it would have.
+deleting a feature almost always feels better than shipping one nobody asked for.
 
 what's something you built and then quietly killed?
 ```
@@ -63,24 +59,19 @@ what's something you built and then quietly killed?
 ### Thursday
 **1 · afternoon · reflection (question-first shape) (conf 89%):**
 ```
-what's the question that loops in your head at 3am?
-
-mine rotate:
-"is this worth building"
-"will anyone actually pay"
-"am i wasting the year"
-
 solo founding is mostly just arguing with yourself.
+
+is this worth building. will anyone actually pay. am i wasting the year.
+
+what's the question that loops in your head at 3am?
 ```
-**2 · evening · mild take + confession (conf 84%):**
+**2 · evening · mild take (conf 84%):**
 ```
-i spent three weeks picking the "right" stack for my first product.
+your first users don't care what your thing is built with.
 
-my first 100 users never once asked what it was built with.
+they care that it works and that you answer fast when it doesn't.
 
-they cared that it worked and that i replied fast when it didn't.
-
-what did you over-engineer early that literally nobody noticed?
+what did you over-engineer early that nobody ended up noticing?
 ```
 **3 · night · options (conf 85%):**
 ```
@@ -106,23 +97,21 @@ the part of launching i dread the most:
 
 which one gets you?
 ```
-**2 · evening · narrative/story (reshaped, conf 83%):**
+**2 · evening · mild take (conf 83%):**
 ```
-i built a whole onboarding flow for my first app before talking to a single user.
+"just talk to your users" gets shaky for v1.
 
-turns out they wanted the opposite — skip it, just let me try the thing.
+ask 10 people and you can walk away with 10 different products.
 
-three weeks, gone.
+sometimes you have to build something to even know what to ask them.
 
 did talking to users early save you, or did building first teach you more?
 ```
-**3 · night · confession (chop as lens) (conf 92%):**
+**3 · night · question (conf 92%):**
 ```
-spent an hour tonight making chop suggest an ingredient swap when you're missing one thing.
+building is a really comfortable place to hide from the scary stuff on your list.
 
-real reason: i didn't want to do the scary marketing task on my list.
-
-building is such a comfortable place to hide.
+shipping a feature always feels safer than doing the marketing.
 
 what do you build to avoid doing?
 ```
@@ -134,19 +123,15 @@ most "i'll launch this weekend" projects never launch.
 
 not because they're bad — because sunday you always find one more reason it's "not ready."
 
-i've got one sitting in my repo right now doing exactly this.
-
-what's yours?
+what's the one sitting in your repo right now, not ready?
 ```
 **2 · evening · reflection (conf 83%):**
 ```
-month two solo and the loneliest part isn't the work.
+the lonely part of building solo isn't the work.
 
-it's having a tiny win at midnight and having literally no one in the room to say "yo, it worked" to.
+it's having a tiny win at midnight and having no one in the room to say "yo, it worked" to.
 
-so consider this the room.
-
-what did you ship this week?
+so consider this the room. what did you ship this week?
 ```
 **3 · night · live options (conf 85%):**
 ```
