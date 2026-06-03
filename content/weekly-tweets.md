@@ -20,77 +20,144 @@
 
 ## Revised Plan — Wednesday → Saturday (v2)
 
+> **v2.1 (Jun 3):** Rewritten by the copy + banger-gate critic teams for maximum
+> **reply-itch** and high banger-classifier scores. 3 posts/day (afternoon /
+> evening / night — morning dropped, it was dead). Each day rotates 3 archetypes:
+> reflection+confession, question+options, builder-question/mild-take. Structures
+> deliberately varied (some open on the question, some run as narrative) so the
+> week doesn't read as one repeated template. Critic confidence noted per tweet.
+
 ### Wednesday
-**1 · ~7pm (reflection + question):**
+**1 · afternoon · builder question (conf 86%):**
 ```
-a month in, the thing nobody warned me about building solo:
+posting every commit got me 4 likes and zero users.
 
-you can ship every day and still feel like you're standing still.
+one post that just said "i have no idea how to get users" got me 40 replies and my first 10 customers.
 
-how do you tell real progress from motion?
+turns out admitting you're lost beats looking like you're winning.
+
+what's the post that actually got you users?
 ```
-**2 · ~11pm (options):**
+**2 · evening · options (conf 88%):**
 ```
-building an AI agent, what's actually the hard part?
+the thing that quietly eats the most of my solo-dev week:
 
-> context
-> tool/integration hell
-> reliability
-> evals
+> naming things
+> pricing the thing
+> deciding what to NOT build
+> rewriting the same landing page copy
+
+which one's silently killing your time?
+```
+**3 · night · reflection+confession (conf 90%):**
+```
+shipped a feature at 2am that nobody asked for.
+
+woke up, looked at it, deleted it before coffee.
+
+felt better than launching it would have.
+
+what's something you built and then quietly killed?
 ```
 
 ### Thursday
-**1 · ~7pm (reflection + question):**
+**1 · afternoon · reflection (question-first shape) (conf 89%):**
 ```
-i deleted a feature today that took me a week to build.
+what's the question that loops in your head at 3am?
 
-nobody noticed. that's the part that stings.
+mine rotate:
+"is this worth building"
+"will anyone actually pay"
+"am i wasting the year"
 
-what's something you killed that you secretly miss?
+solo founding is mostly just arguing with yourself.
 ```
-**2 · ~11pm (relatable take):**
+**2 · evening · mild take + confession (conf 84%):**
 ```
-devs, be honest:
+i spent three weeks picking the "right" stack for my first product.
 
-how much of your current codebase do you actually understand line by line right now?
+my first 100 users never once asked what it was built with.
+
+they cared that it worked and that i replied fast when it didn't.
+
+what did you over-engineer early that literally nobody noticed?
+```
+**3 · night · options (conf 85%):**
+```
+where do you actually do your best building?
+
+> 6am before the house wakes up
+> normal daylight like a functioning adult
+> 11pm with the world quiet
+> 3am gremlin mode
+
+what time do you actually ship best?
 ```
 
 ### Friday
-**1 · ~7pm (reflection + question):**
+**1 · afternoon · options (conf 90%):**
 ```
-the scariest part of going solo isn't the money.
+the part of launching i dread the most:
 
-it's that there's no one to tell you the idea is bad before you spend 3 months on it.
+> hitting post and hearing crickets
+> someone finding the bug i missed
+> pricing it and feeling like a fraud
+> "how's this different from X?"
 
-how do you sanity-check yourself?
+which one gets you?
 ```
-**2 · ~11pm (options):**
+**2 · evening · narrative/story (reshaped, conf 83%):**
 ```
-what do you build first in a brand new app?
+i built a whole onboarding flow for my first app before talking to a single user.
 
-> auth
-> the core loop
-> landing page
-> payments
+turns out they wanted the opposite — skip it, just let me try the thing.
+
+three weeks, gone.
+
+did talking to users early save you, or did building first teach you more?
+```
+**3 · night · confession (chop as lens) (conf 92%):**
+```
+spent an hour tonight making chop suggest an ingredient swap when you're missing one thing.
+
+real reason: i didn't want to do the scary marketing task on my list.
+
+building is such a comfortable place to hide.
+
+what do you build to avoid doing?
 ```
 
 ### Saturday (weekend — lighter)
-**1 · ~6pm (reflection + question):**
+**1 · afternoon · builder question (conf 86%):**
 ```
-every side project i abandoned died at the same spot:
+most "i'll launch this weekend" projects never launch.
 
-not the hard part. the boring stretch right after it.
+not because they're bad — because sunday you always find one more reason it's "not ready."
 
-where do yours usually die?
+i've got one sitting in my repo right now doing exactly this.
+
+what's yours?
 ```
-**2 · ~10pm (options):**
+**2 · evening · reflection (conf 83%):**
 ```
-what kills a side project first?
+month two solo and the loneliest part isn't the work.
 
-> boredom
-> no users
-> the day job
-> the next idea
+it's having a tiny win at midnight and having literally no one in the room to say "yo, it worked" to.
+
+so consider this the room.
+
+what did you ship this week?
+```
+**3 · night · live options (conf 85%):**
+```
+saturday night, pick your real one:
+
+> ship the half-done feature
+> finally write the landing page
+> reply to the 3 users who emailed
+> shut the laptop and have a life
+
+what are you actually doing tonight?
 ```
 
 ---

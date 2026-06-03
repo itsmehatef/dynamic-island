@@ -35,8 +35,20 @@ showed, and the scripts that automate the loop.
 - **Pivot to proven formats.** Built a weekly plan of builder-questions,
   question+options, and build-in-public posts (see `content/weekly-tweets.md`).
 - **Live posting Sun–Tue + analysis.** Pulled real metrics, found the patterns
-  above, and revised the plan to v2 (reflection-driven, reply-optimized,
-  evenings only).
+  above, and revised the plan to v2 (reflection-driven, reply-optimized).
+- **Time-of-day correction.** Re-bucketed all posts by real CT time: the
+  "evenings only" claim didn't hold — two of the three biggest hits were
+  *afternoon*. Morning is genuinely dead (avg 33 imp, 0.3 replies). Conclusion:
+  format + reply velocity matter, not the clock. Settled on 3 slots —
+  afternoon / evening / night — and dropped morning.
+- **v2.1 reply-itch rewrite (teams).** Deployed a copywriter + a "banger-gate"
+  critic to rebuild Wed–Sat for maximum reply-itch and high banger-classifier
+  scores. 12 tweets, 3/day. 11 of 12 scored ≥83% confidence of passing the
+  banger gate; structures deliberately varied (question-first, narrative,
+  options, confession) so the week doesn't read as one repeated template.
+  The "hot take:" opener was cut (template tell); an "i'll actually reply"
+  line was softened (borderline engagement-bait). Final slate lives at the top
+  of `content/weekly-tweets.md`.
 
 ## Account snapshot
 
